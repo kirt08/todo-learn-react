@@ -12,8 +12,12 @@ const TaskPage = (props) => {
     useEffect(() => {
         tasksAPI.getById(taskId)
             .then((taskData) => {
-                setTask(taskData)
-                setHasError(false)
+                if (!taskData) {
+                    setHasError(true)
+                } else {
+                    setTask(taskData)
+                    setHasError(false)
+                }
             })
             .catch(() => {
                 setHasError(true)
